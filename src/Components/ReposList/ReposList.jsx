@@ -1,29 +1,49 @@
 import React, { useEffect, useState } from 'react';
 
 const ReposList = ({ reposList }) => {
-  const [photo, setPhoto] = useState([]);
+  const [page, setPage] = useState(1);
+  const [repos, setRepos] = useState([]);
+  const [fetching, setFetching] = useState(true);
+  const BASE_URL = `https://api.github.com/users/DenisShylov/repos?per_page=5&page=${page}`;
+
   useEffect(() => {
-    fetch('https://api.github.com/users/denisshylov/repos?per_page=5').then(
-      (res) => setPhoto(res.json())
-    );
-  }, []);
+    if (fetching) {
+      fetch(BASE_URL)
+        .then((res) => res.json())
+        .then((repositories) => {
+          setRepos([...repos, ...repositories]);
+          setPage((prev) => prev + 1);
+          // console.log(repositories);
+        })
+        .finally(() => setFetching(false));
+    }
+  }, [fetching]);
+
   useEffect(() => {
-    document.addEventListener('scroll', handleScroll);
-    // return () => document.removeEventListener('scroll', handleScroll);
+    document.querySelector('ul').addEventListener('scroll', scrollHandler);
+
+    return () =>
+      document.querySelector('ul').removeEventListener('scroll', scrollHandler);
   }, []);
 
-  const handleScroll = (e) => {
-    console.log(e);
+  const scrollHandler = (e) => {
+    if (
+      e.target.scrollHeight -
+        (e.target.scrollTop +
+          window.document.querySelector('ul').clientHeight) <
+      10
+    ) {
+      setFetching(true);
+    }
   };
   return (
     <ul
-      onScroll={handleScroll}
       style={{
-        height: '630px',
+        height: '100px',
         overflowY: ' scroll',
       }}
     >
-      {reposList.map((listItem) => {
+      {repos.map((listItem) => {
         return (
           <>
             <li

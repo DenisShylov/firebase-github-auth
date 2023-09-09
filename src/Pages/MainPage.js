@@ -19,7 +19,7 @@ const MainPage = () => {
       }}
     >
       <Title userName={userName} />
-      <ReposList reposList={reposList} />;
+      <ReposList reposList={reposList} />
     </div>
   );
 };

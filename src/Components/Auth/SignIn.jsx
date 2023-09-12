@@ -7,7 +7,6 @@ import {
   fetchingDataList,
   getUserName,
   isAuth,
-  showProgress,
 } from '../../Redux/actionCreators';
 
 const SignIn = () => {
@@ -21,7 +20,6 @@ const SignIn = () => {
           dispatch(isAuth());
           dispatch(getUserName(userName));
           dispatch(fetchingDataList(userName));
-          dispatch(showProgress());
           navigate('/repos');
         }
       })

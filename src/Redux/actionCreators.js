@@ -1,7 +1,6 @@
 import getReposList from '../Gateway/GetReposList';
 
 export const IS_AUTH = 'IS_AUTH';
-export const SHOW_PROGRESS = 'SHOW_PROGRESS';
 export const ADD_REPOS = 'ADD_REPOS';
 export const GET_USER_NAME = 'GET_USER_NAME';
 export const REMOVE_DATA = 'REMOVE_DATA';
@@ -11,11 +10,6 @@ export const RESPONSE_FULL = 'RESPONSE_FULL';
 export const isAuth = () => {
   return {
     type: IS_AUTH,
-  };
-};
-export const showProgress = () => {
-  return {
-    type: SHOW_PROGRESS,
   };
 };
 
@@ -45,7 +39,6 @@ export const addListRepositories = (data) => {
 
 export const fetchingDataList = (userName) => {
   return async (dispatch, getState) => {
-    dispatch(showProgress());
     const reposList = dispatch(
       addListRepositories(
         await getReposList(userName, getState().users.currentPage)

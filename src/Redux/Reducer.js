@@ -5,22 +5,16 @@ import {
   PAGE_INCREMENT,
   REMOVE_DATA,
   RESPONSE_FULL,
-  SHOW_PROGRESS,
 } from './actionCreators';
 
 const initialState = {
-  showProgress: false,
   userName: '',
-  full: false,
   currentPage: 1,
   isAuth: false,
   userRepositories: [],
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_PROGRESS: {
-      return { ...state, showProgress: true };
-    }
     case GET_USER_NAME: {
       return { ...state, userName: action.payload };
     }
@@ -33,7 +27,6 @@ const usersReducer = (state = initialState, action) => {
     case RESPONSE_FULL: {
       return {
         ...state,
-        full: true,
       };
     }
     case PAGE_INCREMENT: {
@@ -46,13 +39,11 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         userRepositories: [...state.userRepositories, ...action.payload],
-        showProgress: false,
       };
     case REMOVE_DATA: {
       return {
         ...state,
         userName: '',
-        full: false,
         currentPage: 1,
         userRepositories: [],
         isAuth: false,

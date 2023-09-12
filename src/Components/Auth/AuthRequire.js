@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import Constants from '../../Constants/Constants';
 import { authUserSelector } from '../../Redux/selectors';
 
 const AuthRequire = ({ children }) => {
+  const { navigate, useSelector } = Constants();
   const isAuth = useSelector(authUserSelector);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuth) {

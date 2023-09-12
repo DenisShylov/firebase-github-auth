@@ -46,11 +46,14 @@ export const addListRepositories = (data) => {
 export const fetchingDataList = (userName) => {
   return async (dispatch, getState) => {
     dispatch(showProgress());
-    dispatch(
+    const reposList = dispatch(
       addListRepositories(
         await getReposList(userName, getState().users.currentPage)
       )
     );
+    if (reposList.length === 0) {
+      return;
+    }
     dispatch(pageIncrement());
   };
 };

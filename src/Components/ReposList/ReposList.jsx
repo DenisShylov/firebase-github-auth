@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchingDataList, pageIncrement } from '../../Redux/actionCreators';
 import { useInView } from 'react-intersection-observer';
 import { repositoriesListSelector } from '../../Redux/selectors';
-import './ReposList.css';
-import { useNavigate } from 'react-router-dom';
+import { Container, Typography } from '@mui/material';
+import Constants from '../../Constants/Constants';
 
 const ReposList = ({ userName }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { navigate, dispatch, useSelector } = Constants();
   const reposList = useSelector(repositoriesListSelector);
 
   const { ref, inView } = useInView({
@@ -31,7 +29,7 @@ const ReposList = ({ userName }) => {
 
   return (
     <>
-      <h1>Repositories List</h1>
+      <Typography variant="h3">Repositories List</Typography>
       <ul
         style={{
           height: '250px',
@@ -42,7 +40,7 @@ const ReposList = ({ userName }) => {
       >
         {reposList.map((listItem) => {
           return (
-            <div>
+            <Container>
               <li
                 ref={ref}
                 onClick={handleReposNameInParams}
@@ -61,12 +59,11 @@ const ReposList = ({ userName }) => {
                     marginRight: '10px',
                   }}
                   src="http://httpbin.org/image/png"
-                  className="visible"
                   alt="img"
                 />
                 {listItem.name}
               </li>
-            </div>
+            </Container>
           );
         })}
       </ul>

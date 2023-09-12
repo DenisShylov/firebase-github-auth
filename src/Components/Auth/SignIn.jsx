@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import {
   fetchingDataList,
   getUserName,
+  isAuth,
   showProgress,
 } from '../../Redux/actionCreators';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +20,7 @@ const SignIn = () => {
       .then((res) => {
         const userName = res.user.reloadUserInfo.screenName;
         if (res) {
+          dispatch(isAuth());
           dispatch(getUserName(userName));
           dispatch(fetchingDataList(userName));
           dispatch(showProgress());

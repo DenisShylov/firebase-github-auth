@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { authUserSelector } from 'redux/Auth/auth.selectors';
+import { authUserSelector } from '../../Redux/selectors';
 
 const AuthRequire = ({ children }) => {
   const isAuth = useSelector(authUserSelector);
@@ -9,7 +9,7 @@ const AuthRequire = ({ children }) => {
 
   useEffect(() => {
     if (!isAuth) {
-      navigate('/auth/login');
+      navigate('/');
     }
   }, [isAuth, navigate]);
 

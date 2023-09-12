@@ -32,6 +32,14 @@ root.render(
             </AuthRequire>
           }
         />
+        <Route
+          path="/repos/:repos_name"
+          element={
+            <AuthRequire>
+              <MainPage />
+            </AuthRequire>
+          }
+        />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </Provider>

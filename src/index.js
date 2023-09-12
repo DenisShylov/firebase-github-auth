@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,16 +8,40 @@ import store, { persistor } from './Redux/store.js';
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 import MainPage from './Pages/MainPage';
 import { PersistGate } from 'redux-persist/integration/react';
+import AuthRequire from './Components/Auth/AuthRequire';
+import Settings from './Components/Settings/Settings';
+import Header from './Components/Header/Header';
+
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
+      <AuthRequire>
+        <Header />
+      </AuthRequire>
       <PersistGate loading={null} persistor={persistor}></PersistGate>
       <Routes>
         <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<App />} />
-        <Route path="/repos" element={<MainPage />} />
+        <Route
+          path="/repos"
+          element={
+            <AuthRequire>
+              <MainPage />
+            </AuthRequire>
+          }
+        />
+        <Route
+          path="/repos/:repos_name"
+          element={
+            <AuthRequire>
+              <MainPage />
+            </AuthRequire>
+          }
+        />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Provider>
   </BrowserRouter>

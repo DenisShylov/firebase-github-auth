@@ -1,20 +1,11 @@
 import { Container } from '@mui/material';
 import './App.css';
-import SignIn from './Components/Auth/SignIn';
+import LoginPage from './Pages/LoginPage';
 
 function App() {
   return (
-    <Container
-      maxWidth="xs"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        width: '100vw',
-      }}
-    >
-      <SignIn />
+    <Container maxWidth="xl" className="App-container">
+      <LoginPage />
     </Container>
   );
 }

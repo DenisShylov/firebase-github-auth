@@ -2,25 +2,27 @@ import React from 'react';
 import Title from '../Components/Title/Title';
 import ReposList from '../Components/ReposList/ReposList.jsx';
 import { useSelector } from 'react-redux';
-import { repositoriesListSelector, userNameSelector } from '../Redux/selectors';
+import { userNameSelector } from '../Redux/selectors';
+import { Container } from '@mui/material';
 
 const MainPage = () => {
   const userName = useSelector(userNameSelector);
-  const reposList = useSelector(repositoriesListSelector);
 
   return (
-    <div
+    <Container
+      maxWidth="xl"
       className="main-page"
-      style={{
+      sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        height: '100vh',
       }}
     >
       <Title userName={userName} />
-      <ReposList reposList={reposList} />;
-    </div>
+      <ReposList userName={userName} />
+    </Container>
   );
 };
 

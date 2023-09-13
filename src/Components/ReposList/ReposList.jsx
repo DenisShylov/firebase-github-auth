@@ -1,9 +1,22 @@
 import React, { useEffect } from 'react';
-import { fetchingDataList, pageIncrement } from '../../Redux/actionCreators';
+import {
+  addSelectedRepos,
+  fetchingDataList,
+  pageIncrement,
+} from '../../Redux/actionCreators';
 import { useInView } from 'react-intersection-observer';
 import { repositoriesListSelector } from '../../Redux/selectors';
-import { Container, Typography } from '@mui/material';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Container,
+  Typography,
+} from '@mui/material';
 import Constants from '../../Constants/Constants';
+import ModalWindow from '../ModalWindow/ModalWindow';
+import PropTypes from 'prop-types';
 
 const ReposList = ({ userName }) => {
   const { navigate, dispatch, useSelector } = Constants();
@@ -24,51 +37,57 @@ const ReposList = ({ userName }) => {
   }, [inView]);
 
   const handleReposNameInParams = (e) => {
-    navigate(`/repos/${e.target.textContent}`);
+    const text = e.target.textContent;
+    dispatch(addSelectedRepos(text));
+    navigate(`/repos/${text}`);
+    <ModalWindow />;
   };
 
   return (
     <>
       <Typography variant="h3">Repositories List</Typography>
-      <ul
-        style={{
-          height: '250px',
-          overflowY: ' scroll',
-          width: '300px',
-          listStyleType: 'none',
-        }}
-      >
-        {reposList.map((listItem) => {
-          return (
-            <Container>
-              <li
-                ref={ref}
+      {reposList.map((listItem) => {
+        return (
+          <Container
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Card
+              sx={{ width: '345px', marginTop: '20px', height: '100%' }}
+              ref={ref}
+            >
+              <CardActionArea
                 onClick={handleReposNameInParams}
-                style={{
-                  cursor: 'pointer',
-                  marginTop: '20px',
-                  lineHeight: '30px',
-                }}
+                sx={{ display: 'flex', alignItems: 'center', height: '200px' }}
                 key={listItem.node_id}
               >
-                <img
+                <CardMedia
+                  sx={{ width: '50px', height: '50px' }}
                   loading="lazy"
-                  style={{
-                    width: '30px',
-                    height: '30px',
-                    marginRight: '10px',
-                  }}
-                  src="http://httpbin.org/image/png"
-                  alt="img"
+                  component="img"
+                  height="140"
+                  image="http://httpbin.org/image/png"
+                  alt="pig img"
                 />
-                {listItem.name}
-              </li>
-            </Container>
-          );
-        })}
-      </ul>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {listItem.name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Container>
+        );
+      })}
     </>
   );
 };
 
 export default ReposList;
+
+ReposList.propTypes = {
+  userName: PropTypes.string,
+};

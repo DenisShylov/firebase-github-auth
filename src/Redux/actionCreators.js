@@ -6,6 +6,8 @@ export const GET_USER_NAME = 'GET_USER_NAME';
 export const REMOVE_DATA = 'REMOVE_DATA';
 export const PAGE_INCREMENT = 'PAGE_INCREMENT';
 export const RESPONSE_FULL = 'RESPONSE_FULL';
+export const SELECTED_REPOS = 'SELECTED_REPOS';
+export const CLEAN_SELECTED_REPOS = 'CLEAN_SELECTED_REPOS';
 
 export const isAuth = () => {
   return {
@@ -27,6 +29,19 @@ export const getUserName = (userName) => {
   return {
     type: GET_USER_NAME,
     payload: userName,
+  };
+};
+
+export const addSelectedRepos = (name) => {
+  return {
+    type: SELECTED_REPOS,
+    payload: name,
+  };
+};
+
+export const clearSelectedRepos = () => {
+  return {
+    type: CLEAN_SELECTED_REPOS,
   };
 };
 

@@ -1,9 +1,10 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Title = ({ userName }) => {
   return (
-    <Container>
+    <Container sx={{ marginTop: '200px' }}>
       <Typography
         align="center"
         sx={{ fontWeight: '700', fontSize: '28px' }}
@@ -16,3 +17,7 @@ const Title = ({ userName }) => {
 };
 
 export default Title;
+
+Title.propTypes = {
+  userName: PropTypes.string,
+};

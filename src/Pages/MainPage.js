@@ -17,7 +17,6 @@ const MainPage = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
       }}
     >
       <Title userName={userName} />

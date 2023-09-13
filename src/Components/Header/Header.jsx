@@ -14,6 +14,16 @@ import {
 
 const Header = () => {
   const { navigate, dispatch } = Constants();
+
+  window.onload = function () {
+    sessionStorage.setItem('loaded', true);
+    const loaded = sessionStorage.getItem('loaded');
+
+    if (loaded) {
+      dispatch(removeData());
+    }
+  };
+
   const handleBackHome = () => {
     navigate('/repos');
   };

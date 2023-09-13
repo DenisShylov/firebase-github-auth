@@ -13,6 +13,7 @@ import Settings from './Components/Settings/Settings';
 import Header from './Components/Header/Header';
 
 import './index.css';
+import ModalWindow from './Components/ModalWindow/ModalWindow';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,6 +39,7 @@ root.render(
           element={
             <AuthRequire>
               <MainPage />
+              <ModalWindow />
             </AuthRequire>
           }
         />

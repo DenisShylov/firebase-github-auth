@@ -1,10 +1,12 @@
 import {
   ADD_REPOS,
+  CLEAN_SELECTED_REPOS,
   GET_USER_NAME,
   IS_AUTH,
   PAGE_INCREMENT,
   REMOVE_DATA,
   RESPONSE_FULL,
+  SELECTED_REPOS,
 } from './actionCreators';
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   currentPage: 1,
   isAuth: false,
   userRepositories: [],
+  selectRepos: false,
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -40,6 +43,18 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         userRepositories: [...state.userRepositories, ...action.payload],
       };
+    case SELECTED_REPOS: {
+      return {
+        ...state,
+        selectRepos: action.payload,
+      };
+    }
+    case CLEAN_SELECTED_REPOS: {
+      return {
+        ...state,
+        selectRepos: false,
+      };
+    }
     case REMOVE_DATA: {
       return {
         ...state,
@@ -47,6 +62,7 @@ const usersReducer = (state = initialState, action) => {
         currentPage: 1,
         userRepositories: [],
         isAuth: false,
+        selectRepos: false,
       };
     }
     default:

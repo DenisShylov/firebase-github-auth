@@ -1,13 +1,25 @@
 import { Container } from '@mui/material';
-import './App.css';
 import LoginPage from './Pages/LoginPage';
 
-function App() {
+import './App.css';
+import Constants from './Constants/Constants';
+import { removeData } from './Redux/actionCreators';
+const App = () => {
+  const { dispatch } = Constants();
+  window.onload = function () {
+    sessionStorage.setItem('loaded', true);
+    const loaded = sessionStorage.getItem('loaded');
+
+    if (loaded) {
+      console.log('reload');
+      dispatch(removeData());
+    }
+  };
   return (
     <Container maxWidth="xl" className="App-container">
       <LoginPage />
     </Container>
   );
-}
+};
 
 export default App;
